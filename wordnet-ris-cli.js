@@ -69,6 +69,9 @@ const RIS        = require("./wordnet-ris-api.js")
         }, async (argv) => {
             try {
                 const ris = new RIS(argv.database)
+                let m = argv.lmfDbFile.match(/^@(.+)$/)
+                if (m !== null)
+                    argv.lmfDbFile = require.resolve(m[1])
                 await ris.import(argv.lmfDbFile)
                 process.exit(0)
             }
