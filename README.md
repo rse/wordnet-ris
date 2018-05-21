@@ -16,7 +16,7 @@ About
 This is a [Node.js](https://nodejs.org) Command-Line Interface
 (CLI) and underlying Application Programming Interface (API)
 for creating a WordNet-RIS (Reduced Information Set) out of the
-[WordNet-LMF](https://github.com/globalwordnet/schemas) information as
+[WordNet-LMF](https://github.com/globalwordnet/schemas) (Lexical Markup Framework) information as
 provided by the [wordnet-lmf](https://npmjs.com/wordnet-lmf) module.
 The reduced and simplified JSON-based WordNet-RIS data structure
 just contains all lemmas, their part-of-speech information and their
