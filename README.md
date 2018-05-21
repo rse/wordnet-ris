@@ -33,7 +33,7 @@ Command-Line Interface (CLI)
 ----------------------------
 
 ```sh
-$ wordnet-ris -d wordnet-ris-en.json import @wordnet-lmf-en/wordnet-lmf-en.db
+$ wordnet-ris -d wordnet-ris-en.json import wordnet-lmf-en.db
 $ wordnet-ris -d wordnet-ris-en.json lookup "speaker"
 ```
 
