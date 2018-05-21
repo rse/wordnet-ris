@@ -38,12 +38,30 @@ class API {
         this.cache    = new CacheLRU()
         this.cache.limit(1000)
         this.database = null
-        if (fs.existsSync(this.filename)) {
-            let filename = path.resolve(process.cwd(), this.filename)
-            let data = fs.readFileSync(filename, { encoding: null })
-            data = zlib.gunzipSync(data)
-            this.database = JSON.parse(data)
-        }
+        this.index    = {}
+        if (fs.existsSync(this.filename))
+            this.load()
+    }
+    load () {
+        /*  load compressed JSON  */
+        let filename = path.resolve(process.cwd(), this.filename)
+        let data = fs.readFileSync(filename, { encoding: null })
+        data = zlib.gunzipSync(data)
+        this.database = JSON.parse(data)
+        this.reindex()
+    }
+    save () {
+        /*  write compressed JSON  */
+        let data = JSON.stringify(this.database)
+        data = zlib.gzipSync(data, { level: 9 })
+        fs.writeFileSync(this.filename, data, { encoding: null })
+    }
+    reindex () {
+        /*  index lemmas  */
+        this.index = {}
+        Object.keys(this.database.lemma).forEach((lemma) => {
+            this.index[lemma.toLowerCase()] = lemma
+        })
     }
     async import (lmfFile) {
         /*  query LMF DB file  */
@@ -87,27 +105,45 @@ class API {
             database.lemma[result.writtenForm] = { pos: result.partOfSpeech, syn: synset }
         })
 
-        /*  write compressed JSON  */
-        let data = JSON.stringify(database)
-        data = zlib.gzipSync(data, { level: 9 })
-        fs.writeFileSync(this.filename, data, { encoding: null })
-
         /*  replace internals  */
         this.database = database
+        this.reindex()
+
+        /*  save database  */
+        this.save()
     }
     manifest () {
         /*  return the entire set of lemmas in database  */
         return Object.keys(this.database.lemma)
     }
-    lookup (lemma) {
+    lookup (lemma, options = {}) {
+        /*  determine options defaults  */
+        options = Object.assign({}, {
+            nocase: false,
+            cache:  true
+        }, options)
+
+        /*  optionally map to original lemma  */
+        if (options.nocase) {
+            let lemmaLC = lemma.toLowerCase()
+            if (this.index[lemmaLC] !== undefined)
+                lemma = this.index[lemmaLC]
+        }
+
         /*  check availability  */
         if (this.database.lemma[lemma] === undefined)
             return undefined
 
         /*  try the cache first  */
-        let result = this.cache.get(lemma)
-        if (result !== undefined)
-            return result
+        let result
+        if (options.cache) {
+            result = this.cache.get(lemma)
+            if (result !== undefined)
+                return result
+        }
+
+        /*  determine part-of-speech  */
+        let pos = this.database.lemma[lemma].pos
 
         /*  determine synonym set  */
         let synSet = new Set()
@@ -119,14 +155,10 @@ class API {
         })
         let syn = [ ...synSet.values() ]
 
-        /*  assemble results  */
-        result = {
-            pos: this.database.lemma[lemma].pos,
-            syn: syn
-        }
-
-        /*  cache and return the result  */
-        this.cache.set(lemma, result)
+        /*  assemble, optionally cache and return result  */
+        result = { lemma, pos, syn }
+        if (options.cache)
+            this.cache.set(lemma, result)
         return result
     }
 }
