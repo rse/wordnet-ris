@@ -1,0 +1,41 @@
+{
+    "name":        "wordnet-ris",
+    "version":     "0.9.4",
+    "description": "WordNet Reduced Information Set (RIS)",
+    "keywords":    [ "wordnet", "reduced", "information", "set", "json", "import", "lookup" ],
+    "main":        "wordnet-ris-api.js",
+    "bin":         { "wordnet-ris": "wordnet-ris-cli.js" },
+    "repository": {
+        "type": "git",
+        "url":  "https://github.com/rse/wordnet-ris.git"
+    },
+    "author": {
+        "name":  "Ralf S. Engelschall",
+        "email": "rse@engelschall.com",
+        "url":   "http://engelschall.com"
+    },
+    "license":  "MIT",
+    "homepage": "https://github.com/rse/wordnet-ris",
+    "bugs":     "https://github.com/rse/wordnet-ris/issues",
+    "devDependencies": {
+        "eslint":                  "4.19.1",
+        "eslint-config-standard":  "11.0.0",
+        "eslint-plugin-standard":  "3.1.0",
+        "eslint-plugin-promise":   "3.7.0",
+        "eslint-plugin-import":    "2.12.0",
+        "eslint-plugin-node":      "6.0.1"
+    },
+    "dependencies": {
+        "mz":                      "2.7.0",
+        "yargs":                   "11.0.0",
+        "chalk":                   "2.4.1",
+        "wordnet-lmf":             "0.9.4",
+        "js-yaml":                 "3.11.0"
+    },
+    "engines": {
+        "node":                    ">=8.0.0"
+    },
+    "scripts": {
+        "prepublishOnly": "eslint --config eslint.yaml wordnet-ris-*.js"
+    }
+}
