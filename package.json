@@ -30,6 +30,7 @@
         "yargs":                   "11.0.0",
         "chalk":                   "2.4.1",
         "wordnet-lmf":             "0.9.4",
+        "cache-lru":               "1.1.3",
         "js-yaml":                 "3.11.0"
     },
     "engines": {

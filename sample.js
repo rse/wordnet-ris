@@ -1,12 +1,14 @@
 
 (async () => {
 
-    const WNS = require(".")
+    const WNRIS = require(".")
 
-    let wns = new WNS("test.json")
+    let wnris = new WNRIS("../wordnet-ris-en/wordnet-ris-en.db")
 
-    let results = await wns.lookup("speaker")
-    console.log(results)
+    let result = wnris.lookup("speaker")
+    console.log(result)
+    result = wnris.lookup("speaker")
+    console.log(result)
 
 })().catch((err) => {
     console.log(`ERROR: ${err.stack}`)

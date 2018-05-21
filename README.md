@@ -50,7 +50,7 @@ Application Programming Interface (API)
 
     let ris = new RIS(RISen.json)
 
-    let results = await ris.lookup("speaker")
+    let results = ris.lookup("speaker")
     console.log(results)
 
 })().catch((err) => {

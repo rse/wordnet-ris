@@ -29,11 +29,14 @@ const zlib          = require("zlib")
 
 /*  external requirements  */
 const LMF           = require("wordnet-lmf")
+const CacheLRU      = require("cache-lru")
 
 /*  define the API class  */
 class API {
     constructor (filename) {
         this.filename = filename
+        this.cache    = new CacheLRU()
+        this.cache.limit(1000)
         this.database = null
         if (fs.existsSync(this.filename)) {
             let filename = path.resolve(process.cwd(), this.filename)
@@ -92,9 +95,21 @@ class API {
         /*  replace internals  */
         this.database = database
     }
+    manifest () {
+        /*  return the entire set of lemmas in database  */
+        return Object.keys(this.database.lemma)
+    }
     lookup (lemma) {
+        /*  check availability  */
         if (this.database.lemma[lemma] === undefined)
             return undefined
+
+        /*  try the cache first  */
+        let result = this.cache.get(lemma)
+        if (result !== undefined)
+            return result
+
+        /*  determine synonym set  */
         let synSet = new Set()
         this.database.lemma[lemma].syn.forEach((synset) => {
             this.database.synset[synset].forEach((word) => {
@@ -102,10 +117,16 @@ class API {
                     synSet.add(word)
             })
         })
-        let result = {
+        let syn = [ ...synSet.values() ]
+
+        /*  assemble results  */
+        result = {
             pos: this.database.lemma[lemma].pos,
-            syn: [...synSet.values()].sort()
+            syn: syn
         }
+
+        /*  cache and return the result  */
+        this.cache.set(lemma, result)
         return result
     }
 }
