@@ -1,6 +1,6 @@
 {
     "name":        "wordnet-ris",
-    "version":     "0.9.4",
+    "version":     "0.9.5",
     "description": "WordNet Reduced Information Set (RIS)",
     "keywords":    [ "wordnet", "reduced", "information", "set", "json", "import", "lookup" ],
     "main":        "wordnet-ris-api.js",
