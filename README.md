@@ -2,7 +2,7 @@
 WordNet-RIS
 ===========
 
-WordNet Reduced Informaton Set (RIS)
+WordNet Reduced Information Set (RIS)
 
 <p/>
 <img src="https://nodei.co/npm/wordnet-ris.png?downloads=true&stars=true" alt=""/>
