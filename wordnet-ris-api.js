@@ -44,7 +44,7 @@ class API {
     }
     load () {
         /*  load compressed JSON  */
-        let filename = path.resolve(process.cwd(), this.filename)
+        const filename = path.resolve(process.cwd(), this.filename)
         let data = fs.readFileSync(filename, { encoding: null })
         data = zlib.gunzipSync(data)
         this.database = JSON.parse(data)
@@ -65,9 +65,9 @@ class API {
     }
     async import (lmfFile) {
         /*  query LMF DB file  */
-        let lmf = new LMF({ database: lmfFile })
+        const lmf = new LMF({ database: lmfFile })
         await lmf.open()
-        let results = await lmf.query(`
+        const results = await lmf.query(`
             SELECT    l.writtenForm  AS writtenForm,
                       l.partOfSpeech AS partOfSpeech,
                       GROUP_CONCAT(s.synset, ";") AS synset
@@ -79,9 +79,9 @@ class API {
         await lmf.close()
 
         /*  build JSON database  */
-        let database = { lemma: {}, synset: [] }
+        const database = { lemma: {}, synset: [] }
         let synCnt = 0
-        let synMap = {}
+        const synMap = {}
         results.forEach((result) => {
             let synset = result.synset !== null ? result.synset.split(";") : []
             synset = synset
@@ -125,7 +125,7 @@ class API {
 
         /*  optionally map to original lemma  */
         if (options.nocase) {
-            let lemmaLC = lemma.toLowerCase()
+            const lemmaLC = lemma.toLowerCase()
             if (this.index[lemmaLC] !== undefined)
                 lemma = this.index[lemmaLC]
         }
@@ -143,17 +143,17 @@ class API {
         }
 
         /*  determine part-of-speech  */
-        let pos = this.database.lemma[lemma].pos
+        const pos = this.database.lemma[lemma].pos
 
         /*  determine synonym set  */
-        let synSet = new Set()
+        const synSet = new Set()
         this.database.lemma[lemma].syn.forEach((synset) => {
             this.database.synset[synset].forEach((word) => {
                 if (word !== lemma)
                     synSet.add(word)
             })
         })
-        let syn = [ ...synSet.values() ]
+        const syn = [ ...synSet.values() ]
 
         /*  assemble, optionally cache and return result  */
         result = { lemma, pos, syn }

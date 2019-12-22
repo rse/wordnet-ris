@@ -39,7 +39,7 @@ const RIS        = require("./wordnet-ris-api.js")
     const my = require("./package.json")
 
     /*  command-line option parsing  */
-    let argv = yargs
+    const argv = yargs
         /* eslint indent: off */
         .usage("Usage: $0 [option ...] <command> [option ...] [arg ...]")
         .help("h")
@@ -69,7 +69,7 @@ const RIS        = require("./wordnet-ris-api.js")
         }, async (argv) => {
             try {
                 const ris = new RIS(argv.database)
-                let m = argv.lmfDbFile.match(/^@(.+)$/)
+                const m = argv.lmfDbFile.match(/^@(.+)$/)
                 if (m !== null)
                     argv.lmfDbFile = require.resolve(m[1])
                 await ris.import(argv.lmfDbFile)
@@ -95,7 +95,7 @@ const RIS        = require("./wordnet-ris-api.js")
         }, async (argv) => {
             try {
                 const ris = new RIS(argv.database)
-                let result = await ris.lookup(argv.lemma)
+                const result = await ris.lookup(argv.lemma)
                 if (result === undefined)
                     throw new Error(`lemma "${argv.lemma}" not found`)
                 let output
