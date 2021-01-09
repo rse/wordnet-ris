@@ -28,7 +28,7 @@
         "mz":                      "2.7.0",
         "yargs":                   "16.2.0",
         "chalk":                   "4.1.0",
-        "wordnet-lmf":             "0.9.11",
+        "wordnet-lmf":             "0.9.12",
         "cache-lru":               "1.1.11",
         "js-yaml":                 "4.0.0"
     },
