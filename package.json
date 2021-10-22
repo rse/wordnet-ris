@@ -18,19 +18,19 @@
     "homepage": "https://github.com/rse/wordnet-ris",
     "bugs":     "https://github.com/rse/wordnet-ris/issues",
     "devDependencies": {
-        "eslint":                  "7.17.0",
-        "eslint-config-standard":  "16.0.2",
-        "eslint-plugin-promise":   "4.2.1",
-        "eslint-plugin-import":    "2.22.1",
+        "eslint":                  "7.32.0",
+        "eslint-config-standard":  "16.0.3",
+        "eslint-plugin-promise":   "5.1.1",
+        "eslint-plugin-import":    "2.25.2",
         "eslint-plugin-node":      "11.1.0"
     },
     "dependencies": {
         "mz":                      "2.7.0",
-        "yargs":                   "16.2.0",
-        "chalk":                   "4.1.0",
-        "wordnet-lmf":             "0.9.12",
+        "yargs":                   "17.2.1",
+        "chalk":                   "4.1.2",
+        "wordnet-lmf":             "0.9.15",
         "cache-lru":               "1.1.11",
-        "js-yaml":                 "4.0.0"
+        "js-yaml":                 "4.1.0"
     },
     "engines": {
         "node":                    ">=8.0.0"
