@@ -120,7 +120,7 @@ const RIS        = require("./wordnet-ris-api.js")
     if (argv.version) {
         process.stderr.write(`${my.name} ${my.version} <${my.homepage}>\n`)
         process.stderr.write(`${my.description}\n`)
-        process.stderr.write(`Copyright (c) 2018 ${my.author.name} <${my.author.url}>\n`)
+        process.stderr.write(`Copyright (c) 2018-2025 ${my.author.name} <${my.author.url}>\n`)
         process.stderr.write(`Licensed under ${my.license} <http://spdx.org/licenses/${my.license}.html>\n`)
         process.exit(0)
     }
