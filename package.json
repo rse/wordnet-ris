@@ -26,10 +26,10 @@
     },
     "dependencies": {
         "mz":                      "2.7.0",
-        "yargs":                   "17.6.2",
+        "yargs":                   "17.7.2",
         "chalk":                   "4.1.2",
-        "wordnet-lmf":             "0.9.16",
-        "cache-lru":               "1.1.11",
+        "wordnet-lmf":             "0.9.18",
+        "cache-lru":               "1.2.0",
         "js-yaml":                 "4.1.0"
     },
     "upd":                        [ "!chalk" ],
