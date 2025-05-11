@@ -4,6 +4,7 @@
     "description": "WordNet Reduced Information Set (RIS)",
     "keywords":    [ "wordnet", "reduced", "information", "set", "json", "import", "lookup" ],
     "main":        "wordnet-ris-api.js",
+    "types":       "wordnet-ris-api.d.ts",
     "bin":         { "wordnet-ris": "wordnet-ris-cli.js" },
     "repository": {
         "type": "git",
