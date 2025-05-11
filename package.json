@@ -16,10 +16,10 @@
     "homepage":                    "https://github.com/rse/wordnet-ris",
     "bugs":                        "https://github.com/rse/wordnet-ris/issues",
     "devDependencies": {
-        "eslint":                  "8.32.0",
-        "eslint-config-standard":  "17.0.0",
+        "eslint":                  "8.57.0",
+        "eslint-config-standard":  "17.1.0",
         "eslint-plugin-promise":   "6.1.1",
-        "eslint-plugin-import":    "2.27.5",
+        "eslint-plugin-import":    "2.31.0",
         "eslint-plugin-node":      "11.1.0"
     },
     "dependencies": {
@@ -30,7 +30,7 @@
         "cache-lru":               "1.2.0",
         "js-yaml":                 "4.1.0"
     },
-    "upd":                         [ "!chalk" ],
+    "upd":                         [ "!chalk", "!eslint" ],
     "engines": {
         "node":                    ">=18.0.0"
     },
